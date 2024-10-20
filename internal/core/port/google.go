@@ -3,7 +3,7 @@ package port
 import (
 	"context"
 
-	"github.com/isutare412/oauth-gateaway/internal/core/model"
+	"github.com/isutare412/oauth-gateway/internal/core/model"
 )
 
 type GoogleAuthClient interface {

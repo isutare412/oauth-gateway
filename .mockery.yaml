@@ -1,0 +1,8 @@
+with-expecter: true
+packages:
+  github.com/isutare412/oauth-gateway/internal/core/port:
+    config:
+      dir: "{{.InterfaceDir}}/mock{{.PackageName}}"
+      outpkg: "mock{{.PackageName}}"
+    interfaces:
+      GoogleAuthClient:
