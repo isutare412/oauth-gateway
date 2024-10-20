@@ -10,11 +10,15 @@ type GoogleTokenResponse struct {
 	TokenType      string
 }
 
+// GoogleIDToken represents fields of google ID token.
+// Ref: https://developers.google.com/identity/openid-connect/openid-connect#an-id-tokens-payload.
 type GoogleIDToken struct {
-	IssuedAt   time.Time
-	ExpiresAt  time.Time
-	Subject    string
-	Email      string
+	// ID of google account.
+	Subject   string
+	IssuedAt  time.Time
+	ExpiresAt time.Time
+	Email     string
+	// The user's full name, in a displayable form.
 	Name       string
 	FamilyName string
 	GivenName  string
