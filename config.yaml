@@ -1,3 +1,7 @@
+log:
+  format: text # text / json
+  level: debug # debug / info / warn / error
+  caller: true
 google:
   endpoints:
     token: https://oauth2.googleapis.com/token
