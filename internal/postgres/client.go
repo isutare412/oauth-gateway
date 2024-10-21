@@ -6,9 +6,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/isutare412/oauth-gateway/internal/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+
+	"github.com/isutare412/oauth-gateway/internal/core/model"
+	"github.com/isutare412/oauth-gateway/internal/log"
 )
 
 type Client struct {
@@ -33,7 +35,15 @@ func NewClient(cfg Config) (*Client, error) {
 }
 
 func (c *Client) Initialize(ctx context.Context) error {
-	if err := c.db.WithContext(ctx).AutoMigrate(); err != nil {
+	if err := c.db.WithContext(ctx).AutoMigrate(
+		&model.APIToken{},
+		&model.User{},
+		&model.UserApplicationRole{},
+		&model.GoogleAccount{},
+		&model.Application{},
+		&model.AuthorizedOrigin{},
+		&model.AuthorizedRedirectionURI{},
+	); err != nil {
 		return fmt.Errorf("migrating schemas: %w", err)
 	}
 	return nil
