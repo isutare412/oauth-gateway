@@ -1,3 +1,8 @@
+# docker compose
+TARGET ?=
+ENV_FILE ?= .env
+COMPOSE_CMD = docker compose -f compose.yaml --env-file $(ENV_FILE)
+
 ##@ General
 
 .PHONY: help
@@ -9,6 +14,24 @@ help: ## Display this help.
 .PHONY: mocks
 mocks: mockery ## Generate mock implementations.
 	$(MOCKERY) --config .mockery.yaml
+
+##@ Docker Compose
+
+.PHONY: compose-up
+compose-up: ## Run components.
+	$(COMPOSE_CMD) up -d $(TARGET)
+
+.PHONY: compose-down
+compose-down: ## Shutdown components.
+	$(COMPOSE_CMD) down $(TARGET)
+
+.PHONY: compose-ps
+compose-ps: ## Print running components.
+	$(COMPOSE_CMD) ps $(TARGET)
+
+.PHONY: compose-logs
+compose-logs: ## Tail logs of components.
+	$(COMPOSE_CMD) logs -f $(TARGET)
 
 ##@ Tool Dependencies
 
